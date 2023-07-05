@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draw!
+
+    </title>
+    <style>
+      body {
+        background-color:rgb(51, 51, 51);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: aqua;
+      }
+
+      #video-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+        margin-bottom: 20px;
+      }
+
+      #overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+      }
+
+      .input-div {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid rgb(1, 235, 252);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252),
+          0px 0px 5px rgb(255, 255, 255);
+        animation: flicker 2s linear infinite;
+        margin-bottom: 10px;
+      }
+
+      .icon {
+        color: rgb(1, 235, 252);
+        font-size: 2rem;
+        cursor: pointer;
+        animation: iconflicker 2s linear infinite;
+      }
+
+      .input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer !important;
+      }
+
+      @keyframes flicker {
+        0% {
+          border: 2px solid rgb(1, 235, 252);
+          box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252),
+            0px 0px 5px rgb(255, 255, 255);
+        }
+
+        5% {
+          border: none;
+          box-shadow: none;
+        }
+
+        10% {
+          border: 2px solid rgb(1, 235, 252);
+          box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252),
+            0px 0px 5px rgb(255, 255, 255);
+        }
+
+        25% {
+          border: none;
+          box-shadow: none;
+        }
+
+        30% {
+          border: 2px solid rgb(1, 235, 252);
+          box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252),
+          0px 0px 5px rgb(255, 255, 255);
+        }
+
+        100% {
+          border: 2px solid rgb(1, 235, 252);
+          box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252),
+            0px 0px 5px rgb(255, 255, 255);
+        }
+      }
+
+      @keyframes iconflicker {
+        0% {
+          opacity: 1;
+        }
+
+        5% {
+          opacity: 0.2;
+        }
+
+        10% {
+          opacity: 1;
+        }
+
+        25% {
+          opacity: 0.2;
+        }
+
+        30% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Draw!</h1>
+      <div id="video-container">
+        <video id="video"></video>
+        <img id="overlay" src="" />
+      </div>
+    </div>
+    <div class="input-div">
+      <input class="input" type="file" id="file-input" accept="image/*" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1em"
+        height="1em"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        fill="none"
+        stroke="currentColor"
+        class="icon"
+      >
+        <polyline points="16 16 12 12 8 16"></polyline>
+        <line y2="21" x2="12" y1="12" x1="12"></line>
+        <path
+          d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"
+        ></path>
+        <polyline points="16 16 12 12 8 16"></polyline>
+      </svg>
+    </div>
+
+    <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5" />
+
+    <script>
+      const video = document.getElementById('video');
+      const overlay = document.getElementById('overlay');
+      const opacitySlider = document.getElementById('opacity-slider');
+      let currentScale = 1.0;
+
+      navigator.mediaDevices
+        .getUserMedia({
+          video: true,
+          audio: false,
+        })
+        .then((stream) => {
+          video.srcObject = stream;
+          video.play();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+      // 画像アップロード時に実行する関数
+      function handleFileSelect(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          overlay.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // 透明度スライダーのイベントリスナーを設定
+      opacitySlider.addEventListener('input',function () {
+        overlay.style.opacity = opacitySlider.value;
+      });
+
+      // マウスホイールイベントの処理
+      function handleMouseWheel(event) {
+        const delta = Math.sign(event.deltaY);
+        const scaleFactor = 0.1;
+        if (delta > 0) {
+          currentScale -= scaleFactor;
+        } else if (delta < 0) {
+          currentScale += scaleFactor;
+        }
+        overlay.style.transform = `scale(${currentScale})`;
+      }
+
+      // DOMContentLoaded event to ensure the DOM elements are loaded before adding the event listener
+      document.addEventListener('DOMContentLoaded', function () {
+        // ファイル選択のイベントリスナーを設定
+        document.getElementById('file-input').addEventListener('change', handleFileSelect, false);
+
+        // マウスホイールイベントのイベントリスナーを設定
+        overlay.addEventListener('wheel', handleMouseWheel);
+      });
+    </script>
+  </body>
+</html>
