@@ -6,7 +6,7 @@
   <title>Draw!</title>
   <style>
     body {
-      background-color: rgb(51, 51, 51);
+      background-color: rgb(255, 255, 255);
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
@@ -15,7 +15,13 @@
     h1 {
       text-align: center;
       margin-bottom: 20px;
-      color: rgb(80, 92, 92);
+      color: rgb(107, 107, 107);
+      font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    h5{
+        text-align: center
+        ;
     }
 
     #video-container {
@@ -24,7 +30,7 @@
       justify-content: center;
       align-items: center;
       height: 70vh;
-      margin-bottom: 80px;
+      margin-bottom: 20px;
     }
 
     #overlay {
@@ -51,8 +57,13 @@
       height: 5.3em;
       border: none;
       border-radius: .4em;
-      background: rgba(235, 252, 254, 0.8);
+      background: rgba(253, 255, 255, 0.8);
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: rgba(235, 252, 254, 1);
     }
 
     .container {
@@ -74,10 +85,7 @@
       height: 88%;
       border-radius: 3px;
       border-top: 2px solid rgb(206, 167, 39);
-      background: linear-gradient(
-        -35deg,
-        rgb(238, 194, 47) 5%,
-        rgb(255, 223, 118));
+      background: linear-gradient(-35deg, rgb(238, 194, 47) 5%, rgb(255, 223, 118));
     }
 
     .folder_two {
@@ -112,10 +120,7 @@
       width: 2.5em;
       height: .9em;
       border-radius: 4px 4px 0 0;
-      background: linear-gradient(
-        -35deg,
-        rgb(25, 102, 218),
-        rgb(109, 165, 249));
+      background: linear-gradient(-35deg, rgb(25, 102, 218), rgb(109, 165, 249));
       box-shadow: 0 0 5px rgba(0, 0, 0, .4);
     }
 
@@ -184,7 +189,7 @@
       top: -4.5em;
       width: 7.7em;
       height: 2.6em;
-      background-color: #666;
+      background-color: #a5a5a5;
       color: #fff;
       display: flex;
       justify-content: center;
@@ -199,68 +204,20 @@
     .button:hover .text {
       opacity: 1;
     }
-
-    #opacity-slider {
-      width: 100%;
-    }
-
-    @media only screen and (max-width: 500px) {
-      .input-container {
-        flex-direction: column;
-      }
-
-      .button {
-        margin-bottom: 10px;
-      }
-    }
-    button {
-  margin: 12px;
-  height: 50px;
-  width: 120px;
-  border-radius: 10px;
-  background: #333;
-  justify-content: center;
-  align-items: center;
-  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #444, inset -5px -5px 10px #222;
-  font-family: 'Damion', cursive;
-  border: none;
-  font-size: 16px;
-  color: rgb(161, 161, 161);
-  transition: 500ms;
-}
-
-button:hover {
-  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222, inset -5px -5px 10px #444;
-  color: #d6d6d6;
-  transition: 500ms;
-}
-@media only screen and (max-width: 500px) {
-  .input-container {
-    flex-direction: column;
-  }
-
-  .button {
-    margin-bottom: 10px;
-  }
-
-  #video-container {
-    margin-bottom: 20px;
-  }
-}
-
-
   </style>
 </head>
 <body>
   <div>
     <h1>Draw!</h1>
+    <h5>スマホを紙の上で固定し、描きたい画像を選択</h5>
+    <h5>透明度を調整してなぞって書いてください</h5>
     <div id="video-container">
       <video id="video" autoplay muted playsinline></video>
       <img id="overlay" src="" />
     </div>
   </div>
   <div class="input-container">
-    <label class="button">
+    <label for="file-input" class="button">
       <div class="container">
         <div class="folder folder_one"></div>
         <div class="folder folder_two"></div>
@@ -268,11 +225,11 @@ button:hover {
         <div class="folder folder_four"></div>
       </div>
       <div class="active_line"></div>
-      <input class="file-input" type="file" accept="image/*" style="display: none" />
       <span class="text">File Explorer</span>
     </label>
+    <input type="file" id="file-input" accept="image/*" style="display: none;">
     <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5" />
-    <button id="camera-toggle">📷</button>
+    <button id="camera-toggle" style="background-color: rgba(235, 252, 254, 0.8); border-radius: .4em; border: none; color:white; padding: 10px 20px; font-size: 1rem; cursor: pointer;">📷</button>
   </div>
 
   <script>
@@ -280,6 +237,7 @@ button:hover {
     const overlay = document.getElementById('overlay');
     const opacitySlider = document.getElementById('opacity-slider');
     const cameraToggle = document.getElementById('camera-toggle');
+    const fileInput = document.getElementById('file-input');
     let currentScale = 1.0;
     let currentCamera = 'user';
 
@@ -323,24 +281,18 @@ button:hover {
 
     startCamera();
 
-    // ラベルクリック時のイベントリスナーを設定
-    const label = document.querySelector('.button');
-    label.addEventListener('click', handleLabelClick);
-
-    function handleLabelClick() {
-      const fileInput = document.querySelector('.file-input');
-      fileInput.click();
-    }
-
-    // ファイル選択のイベントリスナーを設定
-    const fileInput = document.querySelector('.file-input');
-    fileInput.addEventListener('change', handleFileSelect);
-
+    // 画像アップロード時に実行する関数
     function handleFileSelect(event) {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = function (e) {
         overlay.src = e.target.result;
+        overlay.style.display = 'block';
+        overlay.style.width = 'auto';
+        overlay.style.height = 'auto';
+        overlay.style.maxWidth = '100%';
+        overlay.style.maxHeight = '100%';
+        overlay.style.transform = 'translate(-50%, -50%)';
       };
       reader.readAsDataURL(file);
     }
@@ -350,7 +302,7 @@ button:hover {
       overlay.style.opacity = opacitySlider.value;
     });
 
-    // マウスホイールイベントの処理を追加
+    // マウスホイールイベントの処理
     function handleMouseWheel(event) {
       const delta = Math.sign(event.deltaY);
       const scaleFactor = 0.1;
@@ -359,11 +311,18 @@ button:hover {
       } else if (delta < 0) {
         currentScale += scaleFactor;
       }
-      overlay.style.transform = `scale(${currentScale})`;
+      overlay.style.transform = `scale(${currentScale}) translate(-50%, -50%)`;
     }
 
-    overlay.addEventListener('wheel', handleMouseWheel);
+    // DOMContentLoaded event to ensure the DOM elements are loaded before adding the event listener
+    document.addEventListener('DOMContentLoaded', function () {
+      // ファイル選択のイベントリスナーを設定
+      document.getElementById('file-input').addEventListener('change', handleFileSelect, false);
+
+      // マウスホイールイベントのイベントリスナーを設定
+      overlay.addEventListener('wheel', handleMouseWheel);
+    });
   </script>
 </body>
+©kousey
 </html>
-
