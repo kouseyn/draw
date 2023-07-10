@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Draw!</title>
   <style>
+    
+    html,body{
+  overflow: hidden
+}
+  
     body {
       background-color: rgb(255, 255, 255);
       font-family: Arial, sans-serif;
@@ -48,23 +53,29 @@
       margin-bottom: 10px;
     }
 
-    .button {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 5.3em;
-      height: 5.3em;
-      border: none;
-      border-radius: .4em;
-      background: rgba(253, 255, 255, 0.8);
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+    button.camera-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #444, inset -5px -5px 10px #222;
+    border: none;
+    font-size: 16px;
+    color: rgb(161, 161, 161);
+    transition: 500ms;
+  }
 
-    .button:hover {
-      background-color: rgba(235, 252, 254, 1);
-    }
+  button.camera-toggle:hover {
+    box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222, inset -5px -5px 10px #444;
+    color: #d6d6d6;
+    transition: 500ms;
+  }
 
     .container {
       position: relative;
@@ -149,7 +160,7 @@
     .button:active .active_line,
     .button:focus .active_line {
       width: 2.3em;
-      background-color: rgb(41, 126, 255);
+      background-color: rgb(51, 91, 177);
     }
 
     .button:focus .container {
@@ -204,6 +215,59 @@
     .button:hover .text {
       opacity: 1;
     }
+    input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 23.5rem;
+  }
+
+  input[type="range"]:focus {
+    outline: none;
+  }
+
+  /* Chrome, Safari, Opera, and Edge Chromium styles */
+  input[type="range"]::-webkit-slider-runnable-track {
+    background-color: #add8e6;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -28px;
+    background-color: #8f9cff;
+    border-radius: 2.5rem;
+    height: 6rem;
+    width: 2rem;
+  }
+
+  input[type="range"]:focus::-webkit-slider-thumb {
+    outline: 3px solid #8f9cff;
+    outline-offset: 0.125rem;
+  }
+
+  /* Firefox styles */
+  input[type="range"]::-moz-range-track {
+    background-color: #add8e6;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    background-color: #8f9cff;
+    border: none;
+    border-radius: 2.5rem;
+    height: 6rem;
+    width: 2rem;
+  }
+
+  input[type="range"]:focus::-moz-range-thumb {
+    outline: 3px solid #8f9cff;
+    outline-offset: 0.125rem;
+  }
   </style>
 </head>
 <body>
@@ -321,6 +385,12 @@
 
       // マウスホイールイベントのイベントリスナーを設定
       overlay.addEventListener('wheel', handleMouseWheel);
+      function disableScroll(event) {
+  event.preventDefault();
+}
+
+// イベントと関数を紐付け
+document.addEventListener('touchmove', disableScroll, { passive: false });
     });
   </script>
 </body>
