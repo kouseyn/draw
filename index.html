@@ -33,6 +33,7 @@ body {
       align-items: center;
       height: 70vh;
       margin-bottom: 20px;
+      z-index:1
     }
 
     #overlay {
@@ -41,6 +42,7 @@ body {
       left: 50%;
       transform: translate(-50%, -50%);
       opacity: 0.5;
+      z-index:1
     }
 
     .input-container {
@@ -228,6 +230,7 @@ body {
       background-color: #9eeef0;
       border-radius: 0.5rem;
       height: 2rem;
+      z-index:2
     }
 
     /* slider thumb */
@@ -239,11 +242,13 @@ body {
       border-radius: 0.5rem;
       height: 3.5rem;
       width: 2.5rem;
+      z-index:2
     }
 
     input[type="range"]:focus::-webkit-slider-thumb {
       outline: 3px solid #b2a2ec;
       outline-offset: 0.125rem;
+      z-index:2
     }
 
     /*********** Firefox styles ***********/
@@ -252,6 +257,7 @@ body {
       background-color: #9eeef0;
       border-radius: 0.5rem;
       height: 2rem;
+      z-index:2
     }
 
     /* slider thumb */
@@ -261,6 +267,7 @@ body {
       border-radius: 0.5rem;
       height: 3.5rem;
       width: 2.5rem;
+      z-index:2
     }
 
     input[type="range"]:focus::-moz-range-thumb{
