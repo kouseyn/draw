@@ -528,6 +528,10 @@ body {
 
       // マウスホイールイベントのイベントリスナーを設定
       overlay.addEventListener('wheel', handleMouseWheel);
+
+      $(function(){
+  $('#video-container').before($('#range'));
+});
     });
   </script>
 </body>
