@@ -50,6 +50,7 @@ body {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+      z-index:2;
     }
 
     .button {
@@ -64,7 +65,7 @@ body {
       background: rgba(253, 255, 255, 0);
       cursor: pointer;
       transition: background-color 0.3s ease;
-      z-index:2
+      z-index:2;
     }
 
     .button:hover {
@@ -78,13 +79,13 @@ body {
       height: 3.1em;
       background: none;
       overflow: hidden;
-      z-index:2
+      z-index:2;
     }
 
     .folder {
       content: '';
       position: absolute;
-      z-index:2
+      z-index:2;
     }
 
     .folder_one {
@@ -94,7 +95,7 @@ body {
       border-radius: 3px;
       border-top: 2px solid rgb(206, 167, 39);
       background: linear-gradient(-35deg, rgb(238, 194, 47) 5%, rgb(255, 223, 118));
-      z-index:2
+      z-index:2;
     }
 
     .folder_two {
@@ -106,7 +107,7 @@ body {
       border-bottom-right-radius: 3px;
       background-color: rgb(206, 167, 39);
       box-shadow: 0 1px 5px -2px rgba(0, 0, 0, .5);
-      z-index:2
+      z-index:2;
     }
 
     .folder_two::before {
@@ -119,7 +120,7 @@ body {
       border-left: 7px solid rgb(206, 167, 39);
       border-top: .3em solid transparent;
       border-bottom: .3em solid transparent;
-      z-index:2
+      z-index:2;
     }
 
     .folder_three {
@@ -133,7 +134,7 @@ body {
       border-radius: 4px 4px 0 0;
       background: linear-gradient(-35deg, rgb(25, 102, 218), rgb(109, 165, 249));
       box-shadow: 0 0 5px rgba(0, 0, 0, .4);
-      z-index:2
+      z-index:2;
     }
 
     .folder_four {
@@ -144,7 +145,7 @@ body {
       border-radius: 1em;
       background-color: rgb(20, 77, 163);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-      z-index:2
+      z-index:2;
     }
 
     .active_line {
@@ -163,7 +164,7 @@ body {
     .button:focus .active_line {
       width: 2.3em;
       background-color: rgb(41, 126, 255);
-      z-index:2
+      z-index:2;
     }
 
     .button:focus .container {
@@ -252,13 +253,13 @@ body {
       border-radius: 0.5rem;
       height: 3.5rem;
       width: 2.5rem;
-      z-index:2
+      z-index:2;
     }
 
     input[type="range"]:focus::-webkit-slider-thumb {
       outline: 3px solid #b2a2ec;
       outline-offset: 0.125rem;
-      z-index:2
+      z-index:2;
     }
 
     /*********** Firefox styles ***********/
@@ -267,7 +268,7 @@ body {
       background-color: #9eeef0;
       border-radius: 0.5rem;
       height: 2rem;
-      z-index:2
+      z-index:2;
     }
 
     /* slider thumb */
@@ -277,7 +278,7 @@ body {
       border-radius: 0.5rem;
       height: 3.5rem;
       width: 2.5rem;
-      z-index:2
+      z-index:2;
     }
 
     input[type="range"]:focus::-moz-range-thumb{
@@ -448,6 +449,7 @@ body {
         color:white;
         padding: 10px 20px; 
         font-size: 1rem;
+        z-index:2;
         cursor: pointer;">📷
         
     </button> 
