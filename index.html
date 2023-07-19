@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="favicon-128.png" sizes="128x128" />
+<meta name="application-name" content="&nbsp;"/>
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+<link rel="manifest" href="manifest.json">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Draw!</title>
   <style>
 body {
-    
     background: linear-gradient(-225deg, #2cd8d579 0%, #c5c1ff88 56%, #ffbac35e 100%);
-
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      overflow-x: hidden; /* 横スクロールを禁止 */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden; /* 横スクロールを禁止 */
     }
 
     h1 {
@@ -32,8 +52,8 @@ body {
       justify-content: center;
       align-items: center;
       height: 70vh;
-      margin-bottom: 20px;
-      z-index:1
+      margin-bottom:20px;
+      z-index:1;
     }
 
     #overlay {
@@ -42,7 +62,6 @@ body {
       left: 50%;
       transform: translate(-50%, -50%);
       opacity: 0.5;
-      z-index:1
     }
 
     .input-container {
@@ -50,7 +69,6 @@ body {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
-      z-index:2;
     }
 
     .button {
@@ -65,12 +83,10 @@ body {
       background: rgba(253, 255, 255, 0);
       cursor: pointer;
       transition: background-color 0.3s ease;
-      z-index:2;
     }
 
     .button:hover {
       background-color: rgba(38, 220, 240, 0);
-      z-index:2
     }
 
     .container {
@@ -79,13 +95,11 @@ body {
       height: 3.1em;
       background: none;
       overflow: hidden;
-      z-index:2;
     }
 
     .folder {
       content: '';
       position: absolute;
-      z-index:2;
     }
 
     .folder_one {
@@ -95,7 +109,6 @@ body {
       border-radius: 3px;
       border-top: 2px solid rgb(206, 167, 39);
       background: linear-gradient(-35deg, rgb(238, 194, 47) 5%, rgb(255, 223, 118));
-      z-index:2;
     }
 
     .folder_two {
@@ -107,7 +120,6 @@ body {
       border-bottom-right-radius: 3px;
       background-color: rgb(206, 167, 39);
       box-shadow: 0 1px 5px -2px rgba(0, 0, 0, .5);
-      z-index:2;
     }
 
     .folder_two::before {
@@ -120,7 +132,6 @@ body {
       border-left: 7px solid rgb(206, 167, 39);
       border-top: .3em solid transparent;
       border-bottom: .3em solid transparent;
-      z-index:2;
     }
 
     .folder_three {
@@ -134,7 +145,6 @@ body {
       border-radius: 4px 4px 0 0;
       background: linear-gradient(-35deg, rgb(25, 102, 218), rgb(109, 165, 249));
       box-shadow: 0 0 5px rgba(0, 0, 0, .4);
-      z-index:2;
     }
 
     .folder_four {
@@ -145,7 +155,6 @@ body {
       border-radius: 1em;
       background-color: rgb(20, 77, 163);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-      z-index:2;
     }
 
     .active_line {
@@ -164,7 +173,6 @@ body {
     .button:focus .active_line {
       width: 2.3em;
       background-color: rgb(41, 126, 255);
-      z-index:2;
     }
 
     .button:focus .container {
@@ -241,7 +249,6 @@ body {
       background-color: #9eeef0;
       border-radius: 0.5rem;
       height: 2rem;
-      z-index:2
     }
 
     /* slider thumb */
@@ -253,13 +260,11 @@ body {
       border-radius: 0.5rem;
       height: 3.5rem;
       width: 2.5rem;
-      z-index:2;
     }
 
     input[type="range"]:focus::-webkit-slider-thumb {
       outline: 3px solid #b2a2ec;
       outline-offset: 0.125rem;
-      z-index:2;
     }
 
     /*********** Firefox styles ***********/
@@ -268,7 +273,6 @@ body {
       background-color: #9eeef0;
       border-radius: 0.5rem;
       height: 2rem;
-      z-index:2;
     }
 
     /* slider thumb */
@@ -278,7 +282,6 @@ body {
       border-radius: 0.5rem;
       height: 3.5rem;
       width: 2.5rem;
-      z-index:2;
     }
 
     input[type="range"]:focus::-moz-range-thumb{
@@ -301,7 +304,6 @@ body {
   color: transparent;
   -webkit-text-stroke: 1px var(--stroke-color);
   cursor: pointer;
-      z-index:2
 }
 
 .front-text {
@@ -351,7 +353,6 @@ body {
       border-radius: 7px;
       cursor: pointer;
       transition: all .3s;
-  z-index:2
     }
 
     .svgContainer {
@@ -417,8 +418,8 @@ body {
   
   <div onCopy="return false;"></div>
     <button class="btn" data-text="Awesome">
-      <span class="actual-text">&nbsp;Drowly&nbsp;</span>
-      <span aria-hidden="true" class="front-text">&nbsp;Drowly&nbsp;</span>
+      <span class="actual-text">&nbsp;Drowly✒&nbsp;</span>
+      <span aria-hidden="true" class="front-text">&nbsp;Drowly✒&nbsp;</span>
   </button>
     <h5></h5>
     
@@ -442,14 +443,12 @@ body {
     <input type="file" id="file-input" accept="image/*" style="display: none;">
     <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5" />
     <button id="camera-toggle"
-        z-inde:2
-        style="background-color: rgba(160, 248, 44, 0.8);
+        style="background-color: rgba(217, 255, 0, 0.8);
         border-radius: .4em;
         border: none; 
         color:white;
-        padding: 10px 20px; 
+        padding: 20px 20px; 
         font-size: 1rem;
-        z-index:2;
         cursor: pointer;">📷
         
     </button> 
@@ -551,14 +550,11 @@ body {
 
       // マウスホイールイベントのイベントリスナーを設定
       overlay.addEventListener('wheel', handleMouseWheel);
-
-      $(function(){
-  $('#video-container').before($('#range'));
-});
-});
-
-    
+    });
   </script>
 </body>
+©kousey
+</html>
+
   @kousey
 </html>
