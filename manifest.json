@@ -1,7 +1,7 @@
 {
     "name": "Drawly",
     "short_name": "Drawly",
-    "start_url": "/",
+    "start_url": "https://kouseyn.github.io/draw",
     "display": "standalone",
     "background_color": "#a1f7f0",
     "theme_color": "#a1f7f0",
