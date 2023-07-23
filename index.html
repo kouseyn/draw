@@ -37,14 +37,12 @@
   <title>Draw!</title>
   <style>
 body {
-    
-    background: linear-gradient(-225deg, #2cd8d579 0%, #c5c1ff88 56%, #ffbac35e 100%);
-
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      overflow-x: hidden; /* 横スクロールを禁止 */
-    }
+  background-image: linear-gradient( 135deg, #C2FFD8 10%, #7e8fff 100%);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  overflow-x: hidden; /* 横スクロールを禁止 */
+}
 
     h1 {
       text-align: center;
@@ -430,48 +428,59 @@ body {
       right: 40px;
     }
 
+  
+
+
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.281); /* オーバーレイの背景色と透明度を設定 */
+      background-color: rgba(0, 0, 0, 0.7);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
     }
 
+    /* Styling for the modal content */
     .modal-content {
-      background-color: #ffffffd3;
+      background-color: #fff;
       padding: 20px;
-      max-width: 300px;
-      border-radius:10px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      max-width: 350px;
+      max-height: 450px;
       text-align: center;
+      color: #333;
     }
 
-    .modal-close {
-  margin: 12px;
-  height: 50px;
-  width: 120px;
-  border-radius: 10px;
-  background: #333;
-  justify-content: center;
-  align-items: center;
-  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #444, inset -5px -5px 10px #222;
-  font-family: 'Damion', cursive;
-  border: none;
-  font-size: 16px;
-  color: rgb(161, 161, 161);
-  transition: 500ms;
-}
+    .modal-content h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
 
-modal-close:hover {
-  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #222, inset -5px -5px 10px #444;
-  color: #d6d6d6;
-  transition: 500ms;
-}
+    .modal-content p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    /* Styling for the close button */
+    .modal-close {
+      background-color: #f94d5c;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background-color: #f72438;
+    }
   </style>
 </head>
 <body>
@@ -527,21 +536,19 @@ modal-close:hover {
   </div>
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
-      <h2>ようこそ👋</h2>
-      <p>ホーム画面追加でダウンロードできます 🐵</p>
-      <br></br>
-      <p></p>
-      <p></p>
-      <p>📒で画像をアップロードします 🐷
-         
-      </p>
-      <br></br>
-      <p>📷ボタンでカメラ反転します 🐤</p>
-      <br></br>
-      <p>🧪スライダーで画像の透明度を調整 🐊</p>
-      <button class="modal-close" onclick="closeModal()">Let's Draw！</button>
+      <h2>Dlawlyへようこそ👋</h2>
+      <p>ホーム画面追加でアプリをダウンロード 📱🎨</p>
+      <br>
+      <p>📒でお気に入りの画像をアップロード 🖼️</p>
+      <br>
+      <p>📷ボタンでカメラを切り替えて創作を楽しもう 📸🔄</p>
+      <br>
+      <p>バーで透明度を調整しユニークな作品を作成 🎨</p>
+      <br>
+      <button class="modal-close" onclick="closeModal()">Let's Draw!</button>
     </div>
   </div>
+</body>
   <script>
     const video = document.getElementById('video');
     const overlay = document.getElementById('overlay');
@@ -669,4 +676,6 @@ modal-close:hover {
 </script>
 </body>
   @kousey
+  
 </html>
+
