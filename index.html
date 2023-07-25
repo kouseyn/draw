@@ -30,21 +30,11 @@
   <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
   <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
   <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
-  <meta property="og:title" content="Drawly - 驚きの絵画体験" />
-<meta property="og:description" content="スマホカメラで紙に現れる不思議なARアプリ！簡単に美しい絵が描けます✍📱楽しいトレース体験をお楽しみください！" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kouseyn.github.io/draw" />
-<meta property="og:image" content="dla.png" />
-<meta property="og:site_name" content="Drawly" />
-<meta property="og:locale" content="ja_JP"  />
-  <meta content="DrawlyはAR技術を使い、スマホのカメラで紙に現れる不思議なサイト。線をなぞるだけで美しい絵が描けます✍📱驚きの絵画体験を楽しもう" name="description">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="keywords" content="ardrawing,絵,描き方">
 <link rel="manifest" href="manifest.json">
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Drawly-AR magic</title>
+  <title>Draw!</title>
   <style>
 body {
   background-image: linear-gradient( 135deg, #C2FFD8 10%, #7e8fff 100%);
@@ -438,62 +428,126 @@ body {
       right: 40px;
     }
 
-  
+    .tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.tutorial-content {
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.tutorial-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  position: relative; /* positionをrelativeに設定 */
+  left: -10%; /* 左に5%移動します。調整したい値に合わせて変更してください */
+}
 
 
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
 
-    /* Styling for the modal content */
-    .modal-content {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-      max-width: 350px;
-      max-height: 450px;
-      text-align: center;
-      color: #333;
-    }
+.tutorial-slide.active {
+  display: block;
+}
 
-    .modal-content h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
+.tutorial-slide img {
+  max-width: 100%; /* Set the maximum width of the image */
+  max-height: 100%; /* Set the maximum height of the image */
+  width: auto;
+  height: auto;
+}
 
-    .modal-content p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
 
-    /* Styling for the close button */
-    .modal-close {
-      background-color: #f94d5c;
-      border: none;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+@media (max-width: 768px) { /* max0width ではなく max-width に修正 */
+  .tutorial-navigation {
+    text-align: center;
+  }
+}
 
-    .modal-close:hover {
-      background-color: #f72438;
-    }
+.tutorial-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.tutorial-navigation button {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+/* Add media query to adjust button positioning on smaller screens */
+@media (max-width: 768px) {
+  .tutorial-navigation {
+    margin-right: 37px;
+    bottom: 60px; /* Adjust the bottom value for mobile devices */
+  }
+}
+
+
+/* CSS for the close button */
+.tutorial-close-button {
+  position: absolute;
+  top: 20px;
+  right: 70px; /* You can adjust the right value as needed */
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
+
+  <div class="tutorial-overlay" id="tutorialOverlay">
+    <div class="tutorial-content">
+      <div class="tutorial-slide active">
+        <img src="1.png" alt="Slide 1">
+      </div>
+      <div class="tutorial-slide">
+        <img src="2.png" alt="Slide 2">
+      </div>
+      <div class="tutorial-slide">
+        <img src="3.png" alt="Slide 3">
+      </div>
+      <div class="tutorial-slide">
+        <img src="4.png" alt="Slide 4">
+      </div>
+      <div class="tutorial-slide">
+        <img src="5.png" alt="Slide 5">
+      </div>
+      <div class="tutorial-navigation">
+        <button onclick="prevSlide()">&lt; vack</button>
+        <button onclick="nextSlide()">next &gt;</button>
+      </div>
+      <button class="tutorial-close-button" onclick="hideTutorial()">Close</button>
+    </div>
+  </div>
   <div class="btn-container"> <!-- ボタンを包むコンテナ要素を追加 -->
     <button class="Btn" onclick="location.href='https:/instagram.com/uhhwee_1107/'">
       <span class="svgContainer">
@@ -517,6 +571,7 @@ body {
       <video id="video" autoplay muted playsinline></video>
       <img id="overlay" src="" />
     </div>
+    
   </div>
   <div class="input-container">
     <label for="file-input" class="button">
@@ -546,18 +601,7 @@ body {
   </div>
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
-      <h2>Drawlyへようこそ👋</h2>
-      <p>ホーム画面追加でアプリをダウンロード 📱🎨</p>
-      <br>
-      <p>📒でお気に入りの画像をアップロード 🖼️</p>
-      <br>
-      <p>📷ボタンでカメラを切り替えて創作を楽しもう 📸🔄</p>
-      <br>
-      <p>バーで透明度を調整しユニークな作品を作成 🎨</p>
-      <br>
-      <button class="modal-close" onclick="closeModal()">Let's Draw!</button>
-    </div>
-  </div>
+
 </body>
   <script>
     const video = document.getElementById('video');
@@ -684,8 +728,60 @@ body {
 
   gtag('config', '[G-24EP32FT39]');
 </script>
+<script>
+    // Tutorial popup logic
+    const tutorialOverlay = document.getElementById('tutorialOverlay');
+    const closeButton = document.getElementById('closeButton');
+    let currentSlideIndex = 0;
+
+    function showTutorial() {
+      tutorialOverlay.style.display = 'flex';
+      currentSlideIndex = 0;
+      showSlide(currentSlideIndex);
+    }
+
+    function hideTutorial() {
+      tutorialOverlay.style.display = 'none';
+    }
+
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.tutorial-slide');
+      slides.forEach((slide, idx) => {
+        if (idx === index) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+    }
+
+    function prevSlide() {
+      currentSlideIndex--;
+      if (currentSlideIndex < 0) {
+        currentSlideIndex = 0;
+      }
+      showSlide(currentSlideIndex);
+    }
+
+    function nextSlide() {
+      const slides = document.querySelectorAll('.tutorial-slide');
+      if (currentSlideIndex < slides.length - 1) {
+        currentSlideIndex++;
+        showSlide(currentSlideIndex);
+      } else {
+        hideTutorial();
+      }
+    }
+
+    // Add event listener to the Let'sDraw button to show the tutorial
+    const letsDrawButton = document.querySelector('.btn');
+    letsDrawButton.addEventListener('click', showTutorial);
+
+    // Add event listener to the Close button to hide the tutorial
+    closeButton.addEventListener('click', hideTutorial);
+
+</script>
 </body>
   @kousey
-  
+ 
 </html>
-
