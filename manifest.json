@@ -1,5 +1,5 @@
 {
-    "name": "Drawly",
+    "name": "Dreap",
     "short_name": "Drawly",
     "start_url": "https://kouseyn.github.io/draw",
     "display": "standalone",
@@ -7,12 +7,12 @@
     "theme_color": "#a1f7f0",
     "icons": [
       {
-        "src": "dla.png",
+        "src": "Dreap.png",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "dla.png",
+        "src": "Dreap.png",
         "sizes": "512x512",
         "type": "image/png"
       }
