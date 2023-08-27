@@ -23,18 +23,13 @@
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
   <link rel="icon" type="image/png" href="favicon-128.png" sizes="128x128" />
-  <meta name="application-name" content="Drleap" />
+  <meta name="application-name" content="&nbsp;" />
   <meta name="msapplication-TileColor" content="#FFFFFF" />
   <meta name="msapplication-TileImage" content="mstile-144x144.png" />
   <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
   <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
   <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
   <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
-  <meta name="description" content="DrleapはAR技術を使い、描きたいイラストがスマホのカメラで紙に現れる不思議なサイト。線をなぞるだけで美しい絵が描けます✍📱驚きの絵画体験を楽しもう">
-<meta property="og:title" content="DRLEAP - 驚きの絵画体験" />
-<meta property="og:description" content="最新のAR技術を使用し、簡単に美しい絵が描けます✍📱素晴らしい絵画体験をお楽しみください！" />
-<meta property="og:image" content="1.webp" />
-
 <link rel="manifest" href="manifest.json">
 
   <meta charset="UTF-8" />
@@ -42,7 +37,7 @@
   <title>Drleap|AR-draw</title>
   <style>
 body {
-  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  background-image: linear-gradient( 135deg, #C2FFD8 10%, #7e8fff 100%);
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
@@ -569,7 +564,7 @@ body {
   <div onCopy="return false;"></div>
     <button class="btn" data-text="Awesome">
       <span class="actual-text">&nbsp;Drleap&nbsp;</span>
-      <span aria-hidden="true" class="front-text">&nbsp;Drleap&nbsp;</span>
+      <span aria-hidden="true" class="front-text">&nbsp;Dreap&nbsp;</span>
   </button>
     <h5></h5>
     
@@ -608,7 +603,10 @@ body {
   </div>
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
+      <!-- video 要素の修正 -->
 <video id="video" playsinline autoplay muted></video>
+
+
 </body>
   <script>
     const video = document.getElementById('video');
@@ -620,21 +618,30 @@ body {
     let currentCamera = 'user';
 
     function startCamera() {
-      navigator.mediaDevices
-        .getUserMedia({
-          video: { facingMode: currentCamera },
-          audio: false,
-        })
-        .then((stream) => {
-          video.srcObject = stream;
-          video.play();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
+  navigator.mediaDevices
+    .getUserMedia({
+      video: { facingMode: currentCamera },
+      audio: false,
+    })
+    .then((stream) => {
+      video.srcObject = stream;
+      video.play();
 
-  function switchCamera() {
+      // インカメラの場合に画像を反転させる
+      if (currentCamera === 'user') {
+        video.style.transform = 'scaleX(-1)';
+      } else {
+        video.style.transform = 'scaleX(1)';
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+}
+
+
+
+    function switchCamera() {
       if (currentCamera === 'user') {
         currentCamera = 'environment';
       } else {
@@ -789,6 +796,6 @@ body {
 
 </script>
 </body>
-  
- 
+
 </html>
+
