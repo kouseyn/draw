@@ -603,9 +603,6 @@ body {
   </div>
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
-      <!-- video 要素の修正 -->
-<video id="video" playsinline autoplay muted></video>
-
 
 </body>
   <script>
@@ -615,7 +612,7 @@ body {
     const cameraToggle = document.getElementById('camera-toggle');
     const fileInput = document.getElementById('file-input');
     let currentScale = 1.0;
-    let currentCamera = 'user';
+    let currentCamera = 'environment'; // 外部カメラを使用
 
     function startCamera() {
   navigator.mediaDevices
@@ -638,7 +635,6 @@ body {
       console.log(e);
     });
 }
-
 
 
     function switchCamera() {
@@ -796,6 +792,7 @@ body {
 
 </script>
 </body>
-
+  @kousey
+ 
 </html>
 
