@@ -794,8 +794,20 @@ body {
 
     // Add event listener to the Close button to hide the tutorial
     closeButton.addEventListener('click', hideTutorial);
+  
 
 </script>
+      <script>
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', (event) => {
+    const now = new Date().getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  });
+</script>
+
 </body>
   @kousey
  
