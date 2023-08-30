@@ -807,6 +807,38 @@ body {
     }
     lastTouchEnd = now;
   });
+
+
+
+        let startX, startY;
+let drawing = false;
+
+canvas.addEventListener("touchstart", (e) => {
+  drawing = true;
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+});
+
+canvas.addEventListener("touchmove", (e) => {
+  if (!drawing) return;
+
+  const newX = e.touches[0].clientX;
+  const newY = e.touches[0].clientY;
+
+  const deltaX = newX - startX;
+  const deltaY = newY - startY;
+
+  // 既存の描画を移動させる関数を呼び出す
+  moveDrawnElements(deltaX, deltaY);
+
+  startX = newX;
+  startY = newY;
+});
+
+canvas.addEventListener("touchend", () => {
+  drawing = false;
+});
+
 </script>
 
 </body>
