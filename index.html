@@ -848,7 +848,61 @@ canvas.addEventListener("touchend", () => {
 
 </script>
 
+<script>
+  // タッチイベントの初期位置
+  let touchStartX = 0;
+  let touchStartY = 0;
+  
+  // 画像の初期位置
+  let imageX = 0;
+  let imageY = 0;
+  
+  // 画像要素とコンテナ要素の取得
+  const image = document.getElementById('overlay');
+  const container = document.getElementById('video-container');
+  
+  // タッチ開始時のイベントリスナー
+  container.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  });
+  
+  // タッチ移動時のイベントリスナー
+  container.addEventListener('touchmove', (e) => {
+    if (!touchStartX || !touchStartY) return;
+  
+    const touchEndX = e.touches[0].clientX;
+    const touchEndY = e.touches[0].clientY;
+  
+    // X軸方向の移動量を計算
+    const deltaX = touchEndX - touchStartX;
+    // Y軸方向の移動量を計算
+    const deltaY = touchEndY - touchStartY;
+  
+    // 画像の新しい位置を計算
+    imageX += deltaX;
+    imageY += deltaY;
+  
+    // 画像の移動範囲を制限する場合、ここで制限処理を追加できます
+  
+    // 画像を新しい位置に移動
+    image.style.transform = `translate(${imageX}px, ${imageY}px)`;
+  
+    // タッチ開始位置を更新
+    touchStartX = touchEndX;
+    touchStartY = touchEndY;
+  });
+  
+  // タッチ終了時のイベントリスナー
+  container.addEventListener('touchend', () => {
+    // タッチ終了時には初期化
+    touchStartX = 0;
+    touchStartY = 0;
+  });
+</script>
+
 
 </body>
  
 </html>
+
