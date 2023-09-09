@@ -656,7 +656,21 @@ html {
       startCamera();
     }
 
+cameraToggle.addEventListener('click', switchCamera);
 
+    navigator.mediaDevices
+      .enumerateDevices()
+      .then((devices) => {
+        const videoDevices = devices.filter((device) => device.kind === 'videoinput');
+        if (videoDevices.length > 1) {
+          cameraToggle.style.display = 'block';
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    startCamera();
     
 
     // 画像アップロード時に実行する関数
