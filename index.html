@@ -577,7 +577,7 @@ html {
   <div onCopy="return false;"></div>
     <button class="btn" data-text="Awesome">
       <span class="actual-text">&nbsp;Drleap&nbsp;</span>
-      <span aria-hidden="true" class="front-text">&nbsp;Drleap&nbsp;</span>
+      <span aria-hidden="true" class="front-text">&nbsp;Dreap&nbsp;</span>
   </button>
     <h5></h5>
     
@@ -601,15 +601,18 @@ html {
     </label>
     <input type="file" id="file-input" accept="image/*" style="display: none;">
     <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5" />
-<button id=camera-toggle onclick="location.href='https://instagram.com/uhhwee_1107/'"
-        style="background-image: linear-gradient(104deg, rgba(65, 164, 253, 1), rgba(14, 244, 255, 1));
-        border-radius: 0.4em;
+    <button id="camera-toggle"
+        z-inde:2
+        style="background-color: rgba(160, 248, 44, 0.8);
+        border-radius: .4em;
         border: none; 
-        color: white;
-        padding: 14px; 
-        font-size: 1.4rem;
-        z-index: 2;
-        cursor: pointer;">📕</button>
+        color:white;
+        padding: 10px 20px; 
+        font-size: 1rem;
+        z-index:2;
+        cursor: pointer;">📷
+        
+    </button> 
   </div>
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
@@ -644,6 +647,33 @@ html {
     .catch((e) => {
       console.log(e);
     });
+}
+
+
+    function switchCamera() {
+      if (currentCamera === 'user') {
+        currentCamera = 'environment';
+      } else {
+        currentCamera = 'user';
+      }
+      startCamera();
+    }
+
+    cameraToggle.addEventListener('click', switchCamera);
+
+    navigator.mediaDevices
+      .enumerateDevices()
+      .then((devices) => {
+        const videoDevices = devices.filter((device) => device.kind === 'videoinput');
+        if (videoDevices.length > 1) {
+          cameraToggle.style.display = 'block';
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    startCamera();
 
     // 画像アップロード時に実行する関数
     function handleFileSelect(event) {
@@ -923,4 +953,3 @@ overlay.addEventListener('touchcancel', pinchEnd);
 </body>
  
 </html>
-
