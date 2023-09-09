@@ -627,53 +627,22 @@ html {
     let currentScale = 1.0;
     let currentCamera = 'environment'; // 外部カメラを使用
 
-    function startCamera() {
-  navigator.mediaDevices
-    .getUserMedia({
-      video: { facingMode: currentCamera },
-      audio: false,
-    })
-    .then((stream) => {
-      video.srcObject = stream;
-      video.play();
-
-      // インカメラの場合に画像を反転させる
-      if (currentCamera === 'user') {
-        video.style.transform = 'scaleX(-1)';
-      } else {
-        video.style.transform = 'scaleX(1)';
-      }
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-}
-
-
-    function switchCamera() {
-      if (currentCamera === 'user') {
-        currentCamera = 'environment';
-      } else {
-        currentCamera = 'user';
-      }
-      startCamera();
-    }
-
-    cameraToggle.addEventListener('click', switchCamera);
-
-    navigator.mediaDevices
-      .enumerateDevices()
-      .then((devices) => {
-        const videoDevices = devices.filter((device) => device.kind === 'videoinput');
-        if (videoDevices.length > 1) {
-          cameraToggle.style.display = 'block';
+        function startCamera() {
+            navigator.mediaDevices
+                .getUserMedia({
+                    video: { facingMode: 'environment' }, // 外部カメラを使用
+                    audio: false,
+                })
+                .then((stream) => {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
 
-    startCamera();
+        startCamera();
 
     // 画像アップロード時に実行する関数
     function handleFileSelect(event) {
