@@ -75,7 +75,7 @@ html {
       align-items: center;
       height: 70vh;
       margin-bottom: 20px;
-      z-index:1
+      z-index:1;
     }
 
     #overlay {
@@ -84,7 +84,7 @@ html {
       left: 50%;
       transform: translate(-50%, -50%);
       opacity: 0.5;
-      z-index:1
+      z-index:1;
     }
 
     .input-container {
@@ -743,6 +743,7 @@ html {
   <div class="bar"></div>
   <div class="bar"></div>
   
+  
 </div>
 <!-- ×ボタンを追加 -->
 <div class="close-icon" id="close-icon">
@@ -760,6 +761,7 @@ html {
     <li><a href="https://kouseyn.github.io/drleap.official.site/">クレジット</a></li>
     <li><a href="gallery.html">ギャラリー</a></li>
     <li><a href="https://instagram.com/uhhwee_1107/">Instagram</a></li>
+    
   </ul>
 </div>
 
@@ -950,7 +952,7 @@ html {
     function hideTutorial() {
       tutorialOverlay.style.display = 'none';
     }
-
+ z-index: 2;
     function showSlide(index) {
       const slides = document.querySelectorAll('.tutorial-slide');
       slides.forEach((slide, idx) => {
