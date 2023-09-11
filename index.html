@@ -453,13 +453,17 @@ html {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  
 }
+
 
 .tutorial-content {
   max-width: 90%;
   max-height: 90%;
   overflow: hidden;
   text-align: center;
+  
+  
 }
 
 .tutorial-slide {
@@ -469,12 +473,16 @@ html {
   display: none;
   position: relative; /* positionをrelativeに設定 */
   left: -10%; /* 左に5%移動します。調整したい値に合わせて変更してください */
+  
+  
 }
 
 
 
 .tutorial-slide.active {
   display: block;
+  
+  
 }
 
 .tutorial-slide img {
@@ -482,12 +490,14 @@ html {
   max-height: 100%; /* Set the maximum height of the image */
   width: auto;
   height: auto;
+  border-radius: 2%;
 }
 
 
 @media (max-width: 768px) { /* max0width ではなく max-width に修正 */
   .tutorial-navigation {
     text-align: center;
+    
   }
 }
 
@@ -500,6 +510,7 @@ html {
   left: 0;
   right: 0;
   text-align: center;
+  
 }
 
 .tutorial-navigation button {
@@ -509,7 +520,116 @@ html {
   margin: 0 5px;
   border-radius: 5px;
   cursor: pointer;
+  
 }
+
+
+/* ハンバーガーアイコンのスタイル */
+/* ハンバーガーアイコンのスタイル */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hamburger-icon {
+  display: block;
+  cursor: pointer;
+  padding: 10px; /* アイコンの周りに余白を追加 */
+  z-index: 1;
+}
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: #5f5f5f;
+  margin: 6px 0;
+  transition: 0.4s;
+  z-index: 1;
+}
+
+/* ハンバーガーアイコンのアニメーション */
+.change .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.change .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.change .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* メニュー全体のスタイル */
+/* メニュー全体のスタイル */
+.menu {
+  /* display: none; */ /* この行を削除 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* メニューを画面幅いっぱいに広げる */
+  height: 100%;
+  background-color: #3333336c; /* メニューの背景色を変更 */
+  z-index: 3;
+  overflow-y: auto;
+}
+
+  
+
+/* メニューが開いている場合のスタイル */
+.menu.open {
+  display: block;
+}
+
+/* メニューが閉じている場合のスタイル */
+.menu:not(.open) {
+  display: none;
+}
+
+
+/* メニュー項目のスタイル */
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  padding: 20px 0;
+  text-align: center; /* メニュー項目を中央揃えに変更 */
+}
+
+.menu a {
+  color: #ffffff; /* メニューのテキスト色を白に変更 */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-decoration: none;
+  font-size: 1.5rem; /* メニューテキストのフォントサイズを調整 */
+}
+
+
+
 
 
 
@@ -527,12 +647,54 @@ html {
   position: absolute;
   top: 20px;
   right: 70px; /* You can adjust the right value as needed */
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(88, 88, 88, 0);
   border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: 5px;
   cursor: pointer;
+  color: #fff;
+  font-size: 50px;  
 }
+
+
+/* ×ボタンのスタイル */
+.close-icon {
+  display: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #03a9f4;
+}
+
+
+
+
+/* 閉じるボタンのスタイル */
+.close-menu {
+  text-align: right;
+  padding: 20px;
+  left:0;
+  font-size: 50px;
+}
+
+#close-menu-button {
+  background-color: #ffffff00; /* ボタンの背景色を設定 */
+  color: #333333; /* ボタンのテキスト色を設定 */
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 50px;
+}
+
+#close-menu-button:hover {
+  background-color: #333333; /* ボタンの背景色をホバー時に変更 */
+  color: #ffffff; /* ボタンのテキスト色をホバー時に変更 */
+}
+
 
 
   </style>
@@ -560,7 +722,7 @@ html {
         <button onclick="prevSlide()">&lt; vack</button>
         <button onclick="nextSlide()">next &gt;</button>
       </div>
-      <button class="tutorial-close-button" onclick="hideTutorial()">Close</button>
+      <button class="tutorial-close-button" onclick="hideTutorial()">×</button>
     </div>
   </div>
   <div class="btn-container"> <!-- ボタンを包むコンテナ要素を追加 -->
@@ -573,12 +735,32 @@ html {
       <span class="BG"></span>
     </button>
   </div>
+  <!-- ハンバーガーメニューのアイコン -->
+<div class="hamburger-icon" id="hamburger-icon">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+</div>
+<!-- ×ボタンを追加 -->
+<div class="close-icon" id="close-icon">
+  <div class="bar"></div>
+  <div class="bar"></div>
+</div>
+
+
+<div class="menu">
+  <div class="close-menu">
+    <button id="close-menu-button">×</button>
+  </div>
+  <ul>
+    <li><a href="https://kouseyn.github.io/drleap.official.site/">使用方法</a></li>
+    <li><a href="https://kouseyn.github.io/drleap.official.site/">クレジット</a></li>
+    <li><a href="gallery.html">ギャラリー</a></li>
+    <li><a href="https://instagram.com/uhhwee_1107/">Instagram</a></li>
+  </ul>
+</div>
+
   
-  <div onCopy="return false;"></div>
-    <button class="btn" data-text="Awesome">
-      <span class="actual-text">&nbsp;Drleap&nbsp;</span>
-      <span aria-hidden="true" class="front-text">&nbsp;Dreap&nbsp;</span>
-  </button>
     <h5></h5>
     
 
@@ -603,14 +785,14 @@ html {
     <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5" />
     <button id="camera-toggle"　
         z-inde:2
-        style="background: linear-gradient(70deg, blue, pink);
+        style="background: linear-gradient(70deg, rgba(0, 0, 255, 0.247), rgba(255, 192, 203, 0.363));
         border-radius: .4em;
         border: none; 
         color:white;
         padding: 14px 14px; 
         font-size: 1rem;
         z-index:2;
-        cursor: pointer;">📷
+        cursor: pointer;">📚
       
         
         
@@ -620,14 +802,38 @@ html {
     <div class="modal-content">
 
 </body>
+
   <script>
     const video = document.getElementById('video');
     const overlay = document.getElementById('overlay');
     const opacitySlider = document.getElementById('opacity-slider');
     const cameraToggle = document.getElementById('camera-toggle');
     const fileInput = document.getElementById('file-input');
-    let currentScale = 1.0;
     let currentCamera = 'environment'; // 外部カメラを使用
+
+    document.addEventListener('DOMContentLoaded', function () {
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+  const menu = document.querySelector('.menu');
+  const closeMenuButton = document.getElementById('close-menu-button'); // 追加
+
+  hamburgerIcon.addEventListener('click', function () {
+    menu.classList.add('open'); // メニューを表示する
+  });
+
+  closeIcon.addEventListener('click', function () {
+    menu.classList.remove('open'); // メニューを閉じる
+  });
+
+  closeMenuButton.addEventListener('click', function () { // 追加
+    menu.classList.remove('open'); // メニューを閉じる
+  });
+});
+
+
+
+
+
 
         function startCamera() {
             navigator.mediaDevices
@@ -642,7 +848,11 @@ html {
                 .catch((e) => {
                     console.log(e);
                 });
+                
+
+
         }
+        
 
         startCamera();
 
