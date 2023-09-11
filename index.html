@@ -75,7 +75,7 @@ html {
       align-items: center;
       height: 70vh;
       margin-bottom: 20px;
-      z-index:1;
+      z-index:1
     }
 
     #overlay {
@@ -84,7 +84,7 @@ html {
       left: 50%;
       transform: translate(-50%, -50%);
       opacity: 0.5;
-      z-index:1;
+      z-index:1
     }
 
     .input-container {
@@ -557,7 +557,7 @@ html {
   display: block;
   cursor: pointer;
   padding: 10px; /* アイコンの周りに余白を追加 */
-  z-index:2;
+  z-index: 3;
 }
 
 .bar {
@@ -566,7 +566,7 @@ html {
   background-color: #5f5f5f;
   margin: 6px 0;
   transition: 0.4s;
-  z-index:2;
+  z-index: 3;
 }
 
 /* ハンバーガーアイコンのアニメーション */
@@ -677,7 +677,6 @@ html {
   padding: 20px;
   left:0;
   font-size: 50px;
-  z-index:2;
 }
 
 #close-menu-button {
@@ -689,7 +688,7 @@ html {
   cursor: pointer;
   border-radius: 5px;
   font-size: 50px;
-  z-index:2;
+  z-index: 3;
 }
 
 #close-menu-button:hover {
@@ -742,8 +741,6 @@ html {
   <div class="bar"></div>
   <div class="bar"></div>
   <div class="bar"></div>
-  
-  
 </div>
 <!-- ×ボタンを追加 -->
 <div class="close-icon" id="close-icon">
@@ -761,7 +758,6 @@ html {
     <li><a href="https://kouseyn.github.io/drleap.official.site/">クレジット</a></li>
     <li><a href="gallery.html">ギャラリー</a></li>
     <li><a href="https://instagram.com/uhhwee_1107/">Instagram</a></li>
-    
   </ul>
 </div>
 
@@ -789,7 +785,7 @@ html {
     <input type="file" id="file-input" accept="image/*" style="display: none;">
     <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5" />
     <button id="camera-toggle"　
-        z-index:2;
+        z-inde:2
         style="background: linear-gradient(70deg, rgba(0, 0, 255, 0.247), rgba(255, 192, 203, 0.363));
         border-radius: .4em;
         border: none; 
@@ -952,7 +948,7 @@ html {
     function hideTutorial() {
       tutorialOverlay.style.display = 'none';
     }
- z-index: 2;
+
     function showSlide(index) {
       const slides = document.querySelectorAll('.tutorial-slide');
       slides.forEach((slide, idx) => {
