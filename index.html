@@ -45,9 +45,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content="DrleapはAR技術を使い、投影されたお好みの絵の線をなぞるだけで美しい絵が描けます✍📱驚きの絵画体験を楽しもう！" />
   <title>Drleap|AR-draw</title>
-  <div id="loading">
-    <div class="spinner"></div>
-  </div>
   <style>
 body {
   background-image:white ;
@@ -78,7 +75,7 @@ html {
       align-items: center;
       height: 70vh;
       margin-bottom: 20px;
-      z-index:1;
+      z-index: 1;
     }
 
     #overlay {
@@ -87,7 +84,7 @@ html {
       left: 50%;
       transform: translate(-50%, -50%);
       opacity: 0.5;
-      z-index:1;
+      z-index:1
     }
 
     .input-container {
@@ -114,8 +111,8 @@ html {
     }
 
     .button:hover {
-      background-color: rgba(0, 229, 255, 0);
-      z-index:2;
+      background-color: rgba(38, 220, 240, 0);
+      z-index:2
     }
 
     .container {
@@ -396,7 +393,7 @@ html {
       border-radius: 7px;
       cursor: pointer;
       transition: all .3s;
-      z-index:2;
+  z-index:2
     }
 
     .svgContainer {
@@ -559,9 +556,14 @@ html {
 .hamburger-icon {
   display: block;
   cursor: pointer;
-  padding: 10px; /* アイコンの周りに余白を追加 */
-  z-index: 3;
+  padding: 10px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #03a9f4;
+  z-index: 2; /* カメラ要素よりも前面に表示 */
 }
+
 
 .bar {
   width: 30px;
@@ -594,7 +596,7 @@ html {
   left: 0;
   width: 100%; /* メニューを画面幅いっぱいに広げる */
   height: 100%;
-  background: linear-gradient(70deg, rgba(0, 0, 255, 0.247), rgba(241, 85, 111, 0.363));
+  background-color: #3333336c; /* メニューの背景色を変更 */
   z-index: 3;
   overflow-y: auto;
 }
@@ -617,7 +619,6 @@ html {
   list-style: none;
   padding: 0;
   margin: 0;
-  text-align: center; /* メニュー項目を中央揃えに変更 */
 }
 
 .menu li {
@@ -630,7 +631,6 @@ html {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-decoration: none;
   font-size: 1.5rem; /* メニューテキストのフォントサイズを調整 */
-  text-align: center; /* メニュー項目を中央揃えに変更 */
 }
 
 
@@ -686,7 +686,7 @@ html {
 
 #close-menu-button {
   background-color: #ffffff00; /* ボタンの背景色を設定 */
-  color: #ffffff; /* ボタンのテキスト色を設定 */
+  color: #333333; /* ボタンのテキスト色を設定 */
   border: none;
   padding: 10px 20px;
   font-size: 1rem;
@@ -698,7 +698,7 @@ html {
 
 #close-menu-button:hover {
   background-color: #333333; /* ボタンの背景色をホバー時に変更 */
-  color: #ff08084d; /* ボタンのテキスト色をホバー時に変更 */
+  color: #ffffff; /* ボタンのテキスト色をホバー時に変更 */
 }
 
 h5{
@@ -708,8 +708,6 @@ h5{
 }
 
   </style>
-
-
 </head>
 <body>
 
@@ -752,7 +750,6 @@ h5{
   <div class="bar"></div>
   <div class="bar"></div>
   <div class="bar"></div>
-  
 </div>
 <!-- ×ボタンを追加 -->
 <div class="close-icon" id="close-icon">
