@@ -1127,52 +1127,7 @@ canvas.addEventListener("touchend", () => {
     touchStartY = 0;
   });
 </script>
-<script>
-let initialDistance = 0;
-let currentDistance = 0;
-let initialScale = 1;
-let currentScale = 1;
 
-// 2点間の距離を計算する関数
-function calculateDistance(touches) {
-  const [x1, y1] = [touches[0].clientX, touches[0].clientY];
-  const [x2, y2] = [touches[1].clientX, touches[1].clientY];
-  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-}
-
-// ピンチジェスチャー開始時の処理
-function pinchStart(event) {
-  const touches = event.touches;
-  if (touches.length === 2) {
-    initialDistance = calculateDistance(touches);
-    initialScale = currentScale;
-  }
-}
-
-// ピンチジェスチャー中の処理
-function pinchMove(event) {
-  const touches = event.touches;
-  if (touches.length === 2) {
-    currentDistance = calculateDistance(touches);
-    currentScale = (currentDistance / initialDistance) * initialScale;
-    // 画像の拡大縮小を適用
-    overlay.style.transform = `scale(${currentScale}) translate(-50%, -50%)`;
-  }
-}
-
-// ピンチジェスチャー終了時の処理
-function pinchEnd(event) {
-  initialDistance = 0;
-  currentDistance = 0;
-  initialScale = currentScale;
-}
-
-// タッチイベントリスナーを設定
-overlay.addEventListener('touchstart', pinchStart);
-overlay.addEventListener('touchmove', pinchMove);
-overlay.addEventListener('touchend', pinchEnd);
-overlay.addEventListener('touchcancel', pinchEnd);
-</script>
 <script>
   // ボタンがクリックされたらリダイレクトする関数
   document.getElementById("camera-toggle").addEventListener("click", function() {
