@@ -156,7 +156,6 @@ html {
       background: none;
       overflow: hidden;
       z-index:2;
-      margin-left: 1rem;
     }
 
     .folder {
@@ -331,14 +330,12 @@ html {
       height: 3.5rem;
       width: 2.5rem;
       z-index:2;
-      box-shadow: 0 0 8px rgb(194, 120, 255)
     }
 
     input[type="range"]:focus::-webkit-slider-thumb {
       outline: 3px solid #b2a2ec;
       outline-offset: 0.125rem;
       z-index:2;
-      box-shadow: 0 0 8px rgb(165, 117, 255)
     }
 
     /*********** Firefox styles ***********/
@@ -633,7 +630,7 @@ html {
   background: linear-gradient(70deg, rgba(0, 0, 255, 0.247), rgba(241, 85, 111, 0.363));
   z-index: 3;
   overflow-y: auto;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
 }
 
   
@@ -744,11 +741,7 @@ h5{
 }
 
 
-.contents{
-  background-color: #4e4e4e;
-  box-shadow: 0 0 8px rgb(85, 83, 83);
-  border-radius: 20px;
-}
+
   </style>
 </head>
 <body>
@@ -781,11 +774,6 @@ h5{
       <div class="tutorial-slide">
         <img src="5.webp" alt="Slide 5">
       </div>
-      <div class="tutorial-slide">
-        <img src="GIF.gif" alt="Slide 5">
-      </div>
-      
-
       <div class="tutorial-navigation">
         <button onclick="prevSlide()">&lt; </button>
         <button onclick="nextSlide()"> &gt;</button>
@@ -896,8 +884,6 @@ h5{
     <li><a href="https://kouseyn.github.io/draw/">修復🔨</a></li>
     <li><a href="https://forms.gle/4tSKSzXRCBFsLk2z5">バグ報告フォーム😥</a></li>
     <li><a href="https://discord.gg/sJJEDmtK">discord📣</a></li>
-
-    
     <div class="input-container"></div>
 
 
@@ -937,17 +923,14 @@ h5{
     <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5" />
     <button id="camera-toggle"　
         z-inde:2
-        style="background: linear-gradient(70deg, rgb(123, 123, 255), rgb(241, 107, 130));
+        style="background: linear-gradient(70deg, rgba(0, 0, 255, 0.247), rgba(206, 11, 44, 0.363));
         border-radius: .4em;
         border: none; 
         color:white;
         padding: 14px 14px; 
         font-size: 1rem;
         z-index:2;
-        margin-right:4%;
         cursor: pointer;">📚
-        
-        
       
     </div>
         
@@ -1281,4 +1264,3 @@ window.addEventListener('load', function() {
  
   </div>
 </body>
-
