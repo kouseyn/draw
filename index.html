@@ -9,9 +9,9 @@
 描画: ユーザーはスマホを見ながら紙へきれいに描画できます。-->
 <!DOCTYPE html>
 <html lang="ja">
-  <header>
-
-
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3309848605588028"
+     crossorigin="anonymous"></script>
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -20,7 +20,7 @@
   })(window,document,'script','dataLayer','GTM-MMGQN6Z7');</script>
   <!-- End Google Tag Manager -->
 
-
+<script async src="https://fundingchoicesmessages.google.com/i/pub-3309848605588028?ers=1" nonce="Yl-Yc1XJEz4yiI3w9LdRlA"></script><script nonce="Yl-Yc1XJEz4yiI3w9LdRlA">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-24EP32FT39"></script>
 <script>
@@ -89,7 +89,6 @@ body {
 html {
   touch-action: manipulation; /* ピンチジェスチャーによるズームを無効にする */
 }
-
 
     h1 {
       text-align: center;
@@ -630,7 +629,6 @@ html {
   background: linear-gradient(70deg, rgba(0, 0, 255, 0.247), rgba(241, 85, 111, 0.363));
   z-index: 3;
   overflow-y: auto;
-  backdrop-filter: blur(8px);
 }
 
   
@@ -731,7 +729,6 @@ html {
 #close-menu-button:hover {
   background-color: #333333; /* ボタンの背景色をホバー時に変更 */
   color: #ffffff; /* ボタンのテキスト色をホバー時に変更 */
-
 }
 
 h5{
@@ -740,21 +737,9 @@ h5{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-
-
   </style>
 </head>
 <body>
-<div id="loading-screen">
-    <div class="loader">
-      <div class="pencil">
-          <p>Loading...</p>
-          <div class="top"></div>
-      </div>
-      <div class="stroke">
-      </div>
-  </div>
-</div>
 
 
   <div class="tutorial-overlay" id="tutorialOverlay">
@@ -768,9 +753,7 @@ h5{
       <div class="tutorial-slide">
         <img src="3.webp" alt="Slide 3">
       </div>
-      <div class="tutorial-slide">
-        <img src="4.webp" alt="Slide 4">
-      </div>
+
       <div class="tutorial-slide">
         <img src="5.webp" alt="Slide 5">
       </div>
@@ -781,7 +764,6 @@ h5{
       <button class="tutorial-close-button" onclick="hideTutorial()">×</button>
     </div>
   </div>
-
   <div class="btn-container"> <!-- ボタンを包むコンテナ要素を追加 -->
     <button class="Btn" onclick="location.href='https://kouseyn.github.io/draw/'">
       <span class="svgContainer">
@@ -877,19 +859,13 @@ h5{
   <ul>
     <li><a href="https://kouseyn.github.io/drleap.official.site/">使用方法🤔</a></li>
     <li><a href="https://kouseyn.github.io/drleap.official.site/">クレジット📕</a></li>
-    <li><a href="ko-fi.com/drleap/">🔥支援☕</a></li>
     <li><a href="gallery.html">ギャラリー📚</a></li>
     <li><a href="https://instagram.com/uhhwee_1107/">Instagram📷</a></li>
     <li><a href="https://kouseyn.github.io/drleap.official.site/">公式サイト🌐</a></li>
     <li><a href="https://kouseyn.github.io/draw/">修復🔨</a></li>
     <li><a href="https://forms.gle/4tSKSzXRCBFsLk2z5">バグ報告フォーム😥</a></li>
     <li><a href="https://discord.gg/sJJEDmtK">discord📣</a></li>
-    <div class="input-container"></div>
 
-
-
-    <!--<input type="text" id="textInput" placeholder="ここに言葉を入力">
-    <button onclick="checkInput()">確認</button>-->
     <li></li>
     <li></li>
 
@@ -907,7 +883,6 @@ h5{
     </div>
     
   </div>
-  <div class="contents">
   <div class="input-container">
     <label for="file-input" class="button">
       <div class="container">
@@ -932,7 +907,7 @@ h5{
         z-index:2;
         cursor: pointer;">📚
       
-    </div>
+        
         
     </button> 
   </div>
@@ -1228,39 +1203,7 @@ canvas.addEventListener("touchend", () => {
       // demo/index.html にリダイレクト
       window.location.href = "gallery.html";
   });
-  // ページの読み込みが完了したらローディング画面を非表示にする
-window.addEventListener('load', function() {
-    // ローディング画面を非表示にするためのコードをここに追加
-    var loadingScreen = document.getElementById('loading-screen');
-    loadingScreen.style.display = 'none';
-});
-
 </script>
-<script>
-  function checkInput() {
-      // 入力フィールドからテキストを取得
-      var inputText = document.getElementById("textInput").value.toLowerCase();
 
-      // "bye ad" または "byead" が入力された場合、広告を非表示にする
-      if (inputText === "bye ad" || inputText === "byead") {
-          document.getElementById("ad").style.display = "none";
-      }
-  }
-
-  $(function () {
-  var $header = $("#header");
-  $(window).on("load scroll", function () {
-    var value = $(this).scrollTop();
-    if (value > 0) { //スクロールしたら.scroll付与
-      $header.addClass("scroll");
-    } else {
-      $header.removeClass("scroll");
-    }
-  });
-});
-</script>
-<div id="ad">
-  
- 
-  </div>
 </body>
+
