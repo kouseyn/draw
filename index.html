@@ -1100,101 +1100,90 @@ h5{
 
 </script>
       <script>
-  let lastTouchEnd = 0;
-  document.addEventListener('touchend', (event) => {
-    const now = new Date().getTime();
-    if (now - lastTouchEnd <= 300) {
-      event.preventDefault();
-    }
-    lastTouchEnd = now;
-  });
+// タッチイベント用の変数
+let touchStartX1, touchStartY1, touchStartX2, touchStartY2;
+let initialDistance;
+let currentScale = 1;
+let imageX = 0;
+let imageY = 0;
 
+// 画像要素とコンテナ要素の取得
+const image = document.getElementById('overlay');
+const container = document.getElementById('video-container');
 
-
-        let startX, startY;
-let drawing = false;
-
-canvas.addEventListener("touchstart", (e) => {
-  drawing = true;
-  startX = e.touches[0].clientX;
-  startY = e.touches[0].clientY;
+// タッチ開始時のイベントリスナー
+container.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 2) {
+    // 2本の指でタッチした場合
+    const touch1 = e.touches[0];
+    const touch2 = e.touches[1];
+    
+    touchStartX1 = touch1.clientX;
+    touchStartY1 = touch1.clientY;
+    touchStartX2 = touch2.clientX;
+    touchStartY2 = touch2.clientY;
+    
+    // 2本の指の初期距離を計算
+    initialDistance = Math.hypot(touchStartX2 - touchStartX1, touchStartY2 - touchStartY1);
+  } else if (e.touches.length === 1) {
+    // 1本の指でタッチした場合
+    const touch = e.touches[0];
+    touchStartX1 = touch.clientX;
+    touchStartY1 = touch.clientY;
+  }
 });
 
-canvas.addEventListener("touchmove", (e) => {
-  if (!drawing) return;
+// タッチムーブ時のイベントリスナー
+container.addEventListener('touchmove', (e) => {
+  if (e.touches.length === 2) {
+    // 2本の指で移動した場合
+    const touch1 = e.touches[0];
+    const touch2 = e.touches[1];
+    
+    const currentX1 = touch1.clientX;
+    const currentY1 = touch1.clientY;
+    const currentX2 = touch2.clientX;
+    const currentY2 = touch2.clientY;
+    
+    // 2本の指の現在の距離を計算
+    const currentDistance = Math.hypot(currentX2 - currentX1, currentY2 - currentY1);
+    
+    // 距離の変化に基づいて拡大縮小を計算
+    const scaleFactor = currentDistance / initialDistance;
+    currentScale = scaleFactor;
+    
+    // 画像の拡大縮小を適用
+    image.style.transform = `scale(${currentScale}) translate(${imageX}px, ${imageY}px)`;
+  } else if (e.touches.length === 1) {
+    // 1本の指で移動した場合
+    const touch = e.touches[0];
+    const touchEndX = touch.clientX;
+    const touchEndY = touch.clientY;
 
-  const newX = e.touches[0].clientX;
-  const newY = e.touches[0].clientY;
-
-  const deltaX = newX - startX;
-  const deltaY = newY - startY;
-
-  // 既存の描画を移動させる関数を呼び出す
-  moveDrawnElements(deltaX, deltaY);
-
-  startX = newX;
-  startY = newY;
-});
-
-canvas.addEventListener("touchend", () => {
-  drawing = false;
-});
-
-
-
-</script>
-
-<script>
-  // タッチイベントの初期位置
-  let touchStartX = 0;
-  let touchStartY = 0;
-  
-  // 画像の初期位置
-  let imageX = 0;
-  let imageY = 0;
-  
-  // 画像要素とコンテナ要素の取得
-  const image = document.getElementById('overlay');
-  const container = document.getElementById('video-container');
-  
-  // タッチ開始時のイベントリスナー
-  container.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  });
-  
-  // タッチ移動時のイベントリスナー
-  container.addEventListener('touchmove', (e) => {
-    if (!touchStartX || !touchStartY) return;
-  
-    const touchEndX = e.touches[0].clientX;
-    const touchEndY = e.touches[0].clientY;
-  
     // X軸方向の移動量を計算
-    const deltaX = touchEndX - touchStartX;
+    const deltaX = touchEndX - touchStartX1;
     // Y軸方向の移動量を計算
-    const deltaY = touchEndY - touchStartY;
-  
+    const deltaY = touchEndY - touchStartY1;
+
     // 画像の新しい位置を計算
     imageX += deltaX;
     imageY += deltaY;
-  
-    // 画像の移動範囲を制限する場合、ここで制限処理を追加できます
-  
+
     // 画像を新しい位置に移動
-    image.style.transform = `translate(${imageX}px, ${imageY}px)`;
-  
+    image.style.transform = `scale(${currentScale}) translate(${imageX}px, ${imageY}px)`;
+
     // タッチ開始位置を更新
-    touchStartX = touchEndX;
-    touchStartY = touchEndY;
-  });
-  
-  // タッチ終了時のイベントリスナー
-  container.addEventListener('touchend', () => {
-    // タッチ終了時には初期化
-    touchStartX = 0;
-    touchStartY = 0;
-  });
+    touchStartX1 = touchEndX;
+    touchStartY1 = touchEndY;
+  }
+});
+
+// タッチ終了時のイベントリスナー
+container.addEventListener('touchend', () => {
+  touchStartX1 = touchStartY1 = touchStartX2 = touchStartY2 = null;
+  initialDistance = null;
+});
+
 </script>
 
 <script>
@@ -1206,4 +1195,6 @@ canvas.addEventListener("touchend", () => {
 </script>
 
 </body>
+
+
 
