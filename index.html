@@ -1140,11 +1140,14 @@ h5{
     initialDistance = null;
   });
 
-  const lightButton = document.getElementById('lightButton');
+const lightButton = document.getElementById('lightButton');
 
 // ライトを点灯させる関数
 function turnOnLight() {
-    const isLightOn = window.navigator.vibrate(100); // ライトを点灯させる
+    // ライトを点灯させるためのコードをここに追加
+
+    // バイブレーションをオフにする
+    window.navigator.vibrate(0);
 }
 
 // ボタンがクリックされたときにライトを点灯
