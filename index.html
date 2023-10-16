@@ -820,6 +820,7 @@ h5{
     
 
     <div id="video-container">
+      <div id="orientation"></div>
       <video id="video" autoplay muted playsinline></video>
       <img id="overlay" src="" />
     </div>
@@ -1158,6 +1159,21 @@ lightButton.addEventListener('click', () => {
 </script>
 
 
+
+<script>
+  window.addEventListener("load",function(){
+  window.addEventListener("deviceorientation", function(e){
+    let a=e.absolute;//方位が地球座標フレームかデバイス任意フレームか
+    let z=e.alpha;//z軸 0～360
+    let x=e.beta; //x軸 -180～180
+    let y=e.gamma;//y軸 -90～90
+    document.getElementById("orientation").innerHTML=
+      " alpha(z軸):"+z.toFixed(3)+"<br>"+
+      "  beta(x軸):"+x.toFixed(3)+"<br>"+
+      " gamma(y軸):"+y.toFixed(3);
+    });
+  });
+</script>
 
 </body>
 
