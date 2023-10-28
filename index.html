@@ -80,7 +80,7 @@
   <title>Drleap|AR-draw</title>
   <style>
 body {
-  background-image:rgb(255, 255, 255) ;
+  background-image:rgb(248, 248, 248) ;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
@@ -742,7 +742,7 @@ h5{
 <body>
 
 
-  <div class="tutorial-overlay" id="tutorialOverlay">
+  <!--<div class="tutorial-overlay" id="tutorialOverlay">
     <div class="tutorial-content">
       <div class="tutorial-slide active">
         <img src="1.webp" alt="Slide 1">
@@ -756,7 +756,7 @@ h5{
 
       <div class="tutorial-slide">
         <img src="5.webp" alt="Slide 5">
-      </div>
+      </div>!-->
       <div class="tutorial-navigation">
         <button onclick="prevSlide()">&lt; </button>
         <button onclick="nextSlide()"> &gt;</button>
@@ -822,7 +822,7 @@ h5{
     <div id="video-container">
       <div id="orientation"></div>
       <video id="video" autoplay muted playsinline></video>
-      <img id="overlay" src="" />
+      <img id="overlay" style="touch-action: none;">
     </div>
     
   </div>
@@ -839,7 +839,7 @@ h5{
     </label>
     <input type="file" id="file-input" accept="image/*" style="display: none;">
     <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5" />
-    <button id="camera-toggle"　
+    <button id="linkButton"　
         z-inde:2
         style="background: linear-gradient(70deg, rgba(0, 0, 255, 0.247), rgba(206, 11, 44, 0.363));
         border-radius: .4em;
@@ -848,7 +848,8 @@ h5{
         padding: 12px 12px; 
         font-size: 1.5rem;
         z-index:2;
-        cursor: pointer;">👆
+        cursor: pointer;">📤
+        
       
         
         
@@ -933,32 +934,14 @@ h5{
       overlay.style.opacity = opacitySlider.value;
     });
 
-    // 縦スクロールのイベントリスナーを設定
-    function handleTouchMove(event) {
-      event.preventDefault();
-    }
 
-    overlay.addEventListener('touchmove', handleTouchMove, { passive: false });
-
-    // マウスホイールイベントの処理
-    function handleMouseWheel(event) {
-      const delta = Math.sign(event.deltaY);
-      const scaleFactor = 0.1;
-      if (delta > 0) {
-        currentScale -= scaleFactor;
-      } else if (delta < 0) {
-        currentScale += scaleFactor;
-      }
-      overlay.style.transform = `scale(${currentScale}) translate(-50%, -50%)`;
-    }
 
     // DOMContentLoaded event to ensure the DOM elements are loaded before adding the event listener
     document.addEventListener('DOMContentLoaded', function () {
       // ファイル選択のイベントリスナーを設定
       document.getElementById('file-input').addEventListener('change', handleFileSelect, false);
 
-      // マウスホイールイベントのイベントリスナーを設定
-      overlay.addEventListener('wheel', handleMouseWheel);
+
 
       $(function(){
   $('#video-container').before($('#range'));
@@ -1042,123 +1025,26 @@ h5{
   
 
 </script>
+
+<script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
 <script>
-  // タッチイベント用の変数
-  let touchStartX1, touchStartY1, touchStartX2, touchStartY2;
-  let initialDistance;
-  let currentScale = 1;
-  let imageX = 0;
-  let imageY = 0;
-  let isMoveMode = true; // 移動モードを有効にするフラグ
-
-  // 画像要素とコンテナ要素の取得
-  const image = document.getElementById('overlay');
-  const container = document.getElementById('video-container');
-  const toggleButton = document.getElementById('camera-toggle'); // モード切り替えボタン
-
-  // モード切り替えボタンのクリックイベントリスナー
-  toggleButton.addEventListener('click', () => {
-    isMoveMode = !isMoveMode; // モードを切り替える
-    if (isMoveMode) {
-      // 移動モード
-      toggleButton.textContent = '👆';
-    } else {
-      // 拡大縮小モード
-      toggleButton.textContent = '🔍';
-    }
-  });
-
-  // タッチ開始時のイベントリスナー
-  container.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 2 && !isMoveMode) {
-      // 2本の指でタッチした場合かつ拡大縮小モードの場合
-      const touch1 = e.touches[0];
-      const touch2 = e.touches[1];
-
-      touchStartX1 = touch1.clientX;
-      touchStartY1 = touch1.clientY;
-      touchStartX2 = touch2.clientX;
-      touchStartY2 = touch2.clientY;
-
-      // 2本の指の初期距離を計算
-      initialDistance = Math.hypot(touchStartX2 - touchStartX1, touchStartY2 - touchStartY1);
-    } else if (e.touches.length === 1 && isMoveMode) {
-      // 1本の指でタッチした場合かつ移動モードの場合
-      const touch = e.touches[0];
-      touchStartX1 = touch.clientX;
-      touchStartY1 = touch.clientY;
-    }
-  });
-
-  // タッチムーブ時のイベントリスナー
-  container.addEventListener('touchmove', (e) => {
-    if (e.touches.length === 2 && !isMoveMode) {
-      // 2本の指で移動した場合かつ拡大縮小モードの場合
-      const touch1 = e.touches[0];
-      const touch2 = e.touches[1];
-
-      const currentX1 = touch1.clientX;
-      const currentY1 = touch1.clientY;
-      const currentX2 = touch2.clientX;
-      const currentY2 = touch2.clientY;
-
-      // 2本の指の現在の距離を計算
-      const currentDistance = Math.hypot(currentX2 - currentX1, currentY2 - currentY1);
-
-      // 距離の変化に基づいて拡大縮小を計算
-      const scaleFactor = currentDistance / initialDistance;
-      currentScale = scaleFactor;
-
-      // 画像の拡大縮小を適用
-      image.style.transform = `scale(${currentScale}) translate(${imageX}px, ${imageY}px)`;
-    } else if (e.touches.length === 1 && isMoveMode) {
-      // 1本の指で移動した場合かつ移動モードの場合
-      const touch = e.touches[0];
-      const touchEndX = touch.clientX;
-      const touchEndY = touch.clientY;
-
-      // X軸方向の移動量を計算
-      const deltaX = touchEndX - touchStartX1;
-      // Y軸方向の移動量を計算
-      const deltaY = touchEndY - touchStartY1;
-
-      // 画像の新しい位置を計算
-      imageX += deltaX;
-      imageY += deltaY;
-
-      // 画像を新しい位置に移動
-      image.style.transform = `scale(${currentScale}) translate(${imageX}px, ${imageY}px)`;
-
-      // タッチ開始位置を更新
-      touchStartX1 = touchEndX;
-      touchStartY1 = touchEndY;
-    }
-  });
-
-  // タッチ終了時のイベントリスナー
-  container.addEventListener('touchend', () => {
-    touchStartX1 = touchStartY1 = touchStartX2 = touchStartY2 = null;
-    initialDistance = null;
-  });
-
-const lightButton = document.getElementById('lightButton');
-
-// ライトを点灯させる関数
-function turnOnLight() {
-    // ライトを点灯させるためのコードをここに追加
-
-    // バイブレーションをオフにする
-    window.navigator.vibrate(0);
-}
-
-// ボタンがクリックされたときにライトを点灯
-lightButton.addEventListener('click', () => {
-    turnOnLight();
-});
-
+   const panzoomEl = document.getElementById('overlay');
+   const instance = panzoom(panzoomEl)
 </script>
 
+    
+  
+</script>
+<script>
+    const linkButton = document.getElementById('linkButton');
+    linkButton.addEventListener('click', function() {
+        window.location.href = 'https://social-plugins.line.me/lineit/share?url=kouseyn.github.io/draw';
+    });
+</script>
 
 </body>
+</html>
+
+
 
 
